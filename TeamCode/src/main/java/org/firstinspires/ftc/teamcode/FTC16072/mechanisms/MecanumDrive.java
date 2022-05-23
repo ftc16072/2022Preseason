@@ -1,9 +1,12 @@
 package org.firstinspires.ftc.teamcode.FTC16072.mechanisms;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.robotcore.external.matrices.GeneralMatrixF;
+import org.firstinspires.ftc.robotcore.external.matrices.MatrixF;
 import org.firstinspires.ftc.teamcode.FTC16072.tests.QQTest;
 import org.firstinspires.ftc.teamcode.FTC16072.tests.TestMotor;
 
@@ -16,12 +19,28 @@ public class MecanumDrive extends Mechanism {
     DcMotorEx leftRear;
     DcMotorEx rightRear;
 
+    private final double GEAR_RATIO = 4.0/6.0;
+    private final double WHEEL_RADIUS = 5.0; //cm
+    private final double TPR = 383.6; //ticks per rotation
+    //cm per rotation/ticks per rotation
+    private final double CM_PER_TICK = (2 * Math.PI * GEAR_RATIO * WHEEL_RADIUS)/TPR;
+    private double maxSpeed = 1.0;
+
+    private int frontLeftOffset;
+    private int frontRightOffset;
+    private int backRightOffset;
+    private int backLeftOffset;
+
     @Override
     public void init(HardwareMap hwMap) {
         leftFront = hwMap.get(DcMotorEx.class, "left_motor_front");
+        leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftRear = hwMap.get(DcMotorEx.class, "left_motor_back");
+        leftRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightRear = hwMap.get(DcMotorEx.class, "right_motor_back");
+        rightRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightFront = hwMap.get(DcMotorEx.class, "right_motor_front");
+        rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
     }
@@ -53,5 +72,39 @@ public class MecanumDrive extends Mechanism {
         rightFront.setPower((rightFrontPower/maxPower));
         rightRear.setPower(rightRearPower/maxPower);
         leftRear.setPower((leftRearPower/maxPower));
+    }
+
+    private MatrixF conversion;
+    private GeneralMatrixF encoderMatrix = new GeneralMatrixF(3,1);
+    public MecanumDrive() {
+        float[] data = {1.0f, 1.0f, 1.0f,
+                        1.0f, 1.0f, 1.0f,
+                        1.0f, 1.0f, 1.0f};
+        conversion = new GeneralMatrixF(3, 3,data);
+        conversion = conversion.inverted();
+    }
+
+    double[] getDistance(){
+        double[] distances = {0.0,0.0};
+
+        encoderMatrix.put(0, 0, (float) ((leftFront.getCurrentPosition() - frontLeftOffset) * CM_PER_TICK));
+        encoderMatrix.put(1, 0, (float) ((rightFront.getCurrentPosition()  - frontRightOffset) * CM_PER_TICK));
+        encoderMatrix.put(2, 0, (float) ((leftRear.getCurrentPosition() - backLeftOffset) * CM_PER_TICK));
+
+        MatrixF distanceMatrix = conversion.multiplied(encoderMatrix);
+        distances[0] = distanceMatrix.get(0,0);
+        distances[1] = distanceMatrix.get(1,0);
+
+        return distances;
+    }
+
+    void setEncodeOffsets() {
+        frontRightOffset = rightFront.getCurrentPosition();
+        frontLeftOffset = leftFront.getCurrentPosition();
+        backLeftOffset = leftRear.getCurrentPosition();
+        backRightOffset = rightRear.getCurrentPosition();
+    }
+    void setMaxSpeed(double speed) {
+        maxSpeed = Math.min(speed, 1.0);
     }
 }

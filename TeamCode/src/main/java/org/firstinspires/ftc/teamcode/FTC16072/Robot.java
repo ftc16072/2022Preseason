@@ -34,6 +34,7 @@ public class Robot {
             mechanism.init(hwMap);
         }
     }
+    
     public List<Mechanism> getMechanismList(){
         return mechanismList;
     }

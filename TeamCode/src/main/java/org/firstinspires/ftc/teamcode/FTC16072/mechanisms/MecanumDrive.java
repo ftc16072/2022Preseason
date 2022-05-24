@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.FTC16072.mechanisms;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -19,9 +20,13 @@ public class MecanumDrive extends Mechanism {
     @Override
     public void init(HardwareMap hwMap) {
         leftFront = hwMap.get(DcMotorEx.class, "left_motor_front");
+        leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftRear = hwMap.get(DcMotorEx.class, "left_motor_back");
+        leftRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightRear = hwMap.get(DcMotorEx.class, "right_motor_back");
+        rightRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightFront = hwMap.get(DcMotorEx.class, "right_motor_front");
+        rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
     }

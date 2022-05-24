@@ -72,9 +72,9 @@ public class MecanumDrive extends Mechanism {
         rightRear.setPower(rightRearPower/maxPower);
         leftRear.setPower((leftRearPower/maxPower));
     }
-
+//TODO: learn the stuff below
     private MatrixF conversion;
-    private GeneralMatrixF encoderMatrix = new GeneralMatrixF(3,1);
+    private final GeneralMatrixF encoderMatrix = new GeneralMatrixF(3,1);
     public MecanumDrive() {
         float[] data = {1.0f, 1.0f, 1.0f,
                         1.0f, 1.0f, 1.0f,

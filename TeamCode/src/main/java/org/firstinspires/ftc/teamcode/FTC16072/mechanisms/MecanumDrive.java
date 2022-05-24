@@ -67,7 +67,6 @@ public class MecanumDrive extends Mechanism {
         maxPower = Math.max(maxPower, Math.abs(rightRearPower));
         maxPower = Math.max(maxPower, Math.abs(leftRearPower));
 
-        maxPower = maxPower * 2;
         leftFront.setPower(leftFrontPower/maxPower);
         rightFront.setPower((rightFrontPower/maxPower));
         rightRear.setPower(rightRearPower/maxPower);

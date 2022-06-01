@@ -1,13 +1,15 @@
-package org.firstinspires.ftc.teamcode.FTC16072.OpModes;
+package org.firstinspires.ftc.teamcode.ftc16072.OpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.FTC16072.Robot;
+import org.firstinspires.ftc.teamcode.ftc16072.Robot;
+import org.firstinspires.ftc.teamcode.ftc16072.util.Navigation;
 
 @TeleOp()
-public class Driving extends OpMode {
+public class FieldRelativeDriving extends OpMode {
     Robot robot = new Robot();
+    Navigation nav = new Navigation(robot);
 
     @Override
     public void init() {
@@ -40,7 +42,7 @@ public class Driving extends OpMode {
         }
         //TODO: Add rotate controls to gamepad
         //y is reversed :(
-        robot.mecanumDrive.drive(-gamepad1.left_stick_y, gamepad1.left_stick_x, 0.0);
+        nav.driveFieldRelative(-gamepad1.left_stick_y, gamepad1.left_stick_x, 0.0);
 
     }
 }

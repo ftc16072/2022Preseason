@@ -1,7 +1,6 @@
-package org.firstinspires.ftc.teamcode.FTC16072.tests;
+package org.firstinspires.ftc.teamcode.ftc16072.tests;
 
 import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 

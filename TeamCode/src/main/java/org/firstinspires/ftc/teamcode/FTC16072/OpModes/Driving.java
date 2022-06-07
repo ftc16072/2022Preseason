@@ -40,7 +40,7 @@ public class Driving extends OpMode {
         }
         //TODO: Add rotate controls to gamepad
         //y is reversed :(
-        robot.mecanumDrive.drive(-gamepad1.left_stick_y, gamepad1.left_stick_x, 0.0);
+        robot.mecanumDrive.drive(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.left_stick_x   );
 
     }
 }

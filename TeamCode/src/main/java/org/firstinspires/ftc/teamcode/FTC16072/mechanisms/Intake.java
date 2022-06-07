@@ -15,6 +15,7 @@ public class Intake extends Mechanism{
     String description;
     boolean reverse;
 
+
     public Intake(String motorName, String description, boolean reverse){
         this.motorName = motorName;
         this.description = description;

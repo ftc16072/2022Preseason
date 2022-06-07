@@ -14,7 +14,7 @@ public class Navigation {
     public void driveFieldRelative(double forward, double right, double rotateSpeed){
         double heading = robot.gyro.getHeading(AngleUnit.RADIANS);
         Polar drive = new Polar(right, forward, DistanceUnit.CM);
-        drive.rotate(-heading, AngleUnit.RADIANS);
+        drive = drive.rotate(-heading, AngleUnit.RADIANS);
 
         robot.mecanumDrive.drive(drive.getY(DistanceUnit.CM), drive.getX(DistanceUnit.CM), rotateSpeed);
     }

@@ -22,7 +22,7 @@ public class Ramp extends Mechanism{
     @Override
     public List<QQTest> getTests() {
         return Arrays.asList(
-                new TestColorSensor("Ramp Color Sensor", colorSensor);
+                new TestColorSensor("Ramp Color Sensor", colorSensor)
         );
     }
 }

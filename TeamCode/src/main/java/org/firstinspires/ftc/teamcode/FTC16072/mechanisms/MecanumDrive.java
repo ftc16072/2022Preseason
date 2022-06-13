@@ -27,8 +27,8 @@ public class MecanumDrive extends Mechanism {
         rightRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightFront = hwMap.get(DcMotorEx.class, "right_motor_front");
         rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     @Override
@@ -47,15 +47,17 @@ public class MecanumDrive extends Mechanism {
         double rightRearPower = forward + right - rotate;
         double leftRearPower = forward - right + rotate;
         double maxPower = 1.0;
+        double maxSpeed = 0.5;
 
         maxPower = Math.max(maxPower, Math.abs(leftFrontPower));
         maxPower = Math.max(maxPower, Math.abs(rightFrontPower));
         maxPower = Math.max(maxPower, Math.abs(rightRearPower));
         maxPower = Math.max(maxPower, Math.abs(leftRearPower));
 
-        leftFront.setPower(leftFrontPower/maxPower);
-        rightFront.setPower((rightFrontPower/maxPower));
-        rightRear.setPower(rightRearPower/maxPower);
-        leftRear.setPower((leftRearPower/maxPower));
+
+        leftFront.setPower(maxSpeed * (leftFrontPower/maxPower));
+        rightFront.setPower(maxSpeed * (rightFrontPower/maxPower));
+        rightRear.setPower(maxSpeed * rightRearPower/maxPower);
+        leftRear.setPower(maxSpeed * (leftRearPower/maxPower));
     }
 }

@@ -19,13 +19,13 @@ public class MecanumDrive extends Mechanism {
 
     @Override
     public void init(HardwareMap hwMap) {
-        leftFront = hwMap.get(DcMotorEx.class, "left_motor_front");
+        leftFront = hwMap.get(DcMotorEx.class, "front_left_motor");
         leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftRear = hwMap.get(DcMotorEx.class, "left_motor_back");
+        leftRear = hwMap.get(DcMotorEx.class, "back_left_motor");
         leftRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightRear = hwMap.get(DcMotorEx.class, "right_motor_back");
+        rightRear = hwMap.get(DcMotorEx.class, "back_right_motor");
         rightRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightFront = hwMap.get(DcMotorEx.class, "right_motor_front");
+        rightFront = hwMap.get(DcMotorEx.class, "front_right_motor");
         rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);

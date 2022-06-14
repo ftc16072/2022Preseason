@@ -2,12 +2,13 @@ package org.firstinspires.ftc.teamcode.FTC16072.util;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.teamcode.FTC16072.MechanumRobot;
 import org.firstinspires.ftc.teamcode.FTC16072.Robot;
 
-public class Navigation {
-    public Robot robot;
+public class NavigationMechanum {
+    public MechanumRobot robot;
 
-    public Navigation(Robot robot){
+    public NavigationMechanum(MechanumRobot robot){
         this.robot = robot;
     }
 

@@ -5,10 +5,14 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.FTC16072.MechanumRobot;
 import org.firstinspires.ftc.teamcode.FTC16072.Robot;
+import org.firstinspires.ftc.teamcode.FTC16072.util.Navigation;
+import org.firstinspires.ftc.teamcode.FTC16072.util.NavigationMechanum;
 
 @TeleOp()
 public class DriveOnly extends OpMode {
     MechanumRobot robot = new MechanumRobot();
+    NavigationMechanum nav = new NavigationMechanum(robot);
+
 
     @Override
     public void init() {
@@ -17,7 +21,7 @@ public class DriveOnly extends OpMode {
 
     @Override
     public void loop() {
-        robot.mecanumDrive.drive(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
+        nav.driveFieldRelative(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
     }
 }

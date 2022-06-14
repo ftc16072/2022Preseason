@@ -9,11 +9,15 @@ public class Polar {
     private double theta;
     private double r;
 
-    public Polar(double angle, AngleUnit au, double r){
+    private void set(double theta,double r){
         this.r = r;
-        this.theta = au.toRadians(angle);
+        this.theta = theta;
         x = r * Math.cos(theta);
         y = r * Math.sin(theta);
+    }
+
+    public Polar(double angle, AngleUnit au, double r){
+        set(au.toRadians(angle),r);
     }
 
     public Polar(double x, double y){
@@ -39,9 +43,8 @@ public class Polar {
         return r;
     }
 
-    public Polar rotate(double angle, AngleUnit au){
-        //angle = angle * Math.PI/180;
-        return new Polar(theta + au.toRadians(angle), AngleUnit.RADIANS, r);
+    public void rotate(double angle, AngleUnit au){
+        set(theta + au.toRadians(angle),r);
     }
 
     public void scaleR(double scale){

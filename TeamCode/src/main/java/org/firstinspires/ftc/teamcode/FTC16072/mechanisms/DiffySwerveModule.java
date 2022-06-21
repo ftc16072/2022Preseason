@@ -14,7 +14,9 @@ public class DiffySwerveModule extends Mechanism {
     DcMotorEx topMotor;
     DcMotorEx bottomMotor;
 
-    private double angle;
+    private double currentAngle;
+    private double targetAngle;
+    private boolean rotating;
 
     @Override
     public void init(HardwareMap hwMap) {
@@ -23,20 +25,31 @@ public class DiffySwerveModule extends Mechanism {
         bottomMotor = hwMap.get(DcMotorEx.class, "bottom_motor");
         bottomMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
-
-    /*public void rotate(double angle){
-        if(this.isRotating()==false){
-            topMotor.setPower(0.0);
-            bottomMotor.setPower(0.0);
-        }
-        if(this.isRotating()==true){
-
-        }
-    }*/
-
-    private double getAngle(AngleUnit au) {
-        return this.angle;
+    public boolean isRotating(){
+        return this.rotating;
+        //TODO:Nikhil and arjuns lazy coding, we will fix
     }
+    public void rotate(double angle){
+        if(!this.isRotating()){
+            targetAngle = angle;
+            this.rotating=true;
+            rotate(targetAngle);
+        }
+        else if(this.isRotating()){
+            rotate(targetAngle);
+            topMotor.setPower(0.5);
+            bottomMotor.setPower(0.5);
+        }
+
+        if(this.currentAngle==this.targetAngle){
+            rotating = false;
+        }
+    }
+
+    /*private double getAngle(AngleUnit au) {
+        return this.au;
+    }*/
+    //TODO:Nikhil and arjuns lazy coding, we will fix
 
     private double ticksToAngle(double ticks) {
         double test = ticks * 2;

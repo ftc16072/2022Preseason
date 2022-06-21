@@ -4,14 +4,12 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.FTC16072.MechanumRobot;
-import org.firstinspires.ftc.teamcode.FTC16072.Robot;
-import org.firstinspires.ftc.teamcode.FTC16072.util.Navigation;
-import org.firstinspires.ftc.teamcode.FTC16072.util.NavigationMechanum;
+import org.firstinspires.ftc.teamcode.FTC16072.util.NavigationMecanum;
 
 @TeleOp()
 public class DriveOnly extends OpMode {
     MechanumRobot robot = new MechanumRobot();
-    NavigationMechanum nav = new NavigationMechanum(robot);
+    NavigationMecanum nav = new NavigationMecanum(robot);
 
 
     @Override

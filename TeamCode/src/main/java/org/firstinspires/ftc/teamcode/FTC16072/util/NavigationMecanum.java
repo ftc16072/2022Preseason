@@ -5,10 +5,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.FTC16072.MechanumRobot;
 import org.firstinspires.ftc.teamcode.FTC16072.Robot;
 
-public class NavigationMechanum {
+public class NavigationMecanum {
     public MechanumRobot robot;
 
-    public NavigationMechanum(MechanumRobot robot){
+    public NavigationMecanum(MechanumRobot robot){
         this.robot = robot;
     }
 

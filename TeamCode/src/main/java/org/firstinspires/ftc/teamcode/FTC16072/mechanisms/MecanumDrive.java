@@ -20,7 +20,7 @@ public class MecanumDrive extends Mechanism {
     DcMotorEx rightRear;
 
     private final double GEAR_RATIO = 4.0 / 6.0;
-    private final double WHEEL_RADIUS = 5.0; //cm
+    private final double WHEEL_RADIUS = 5.0; //cmstarted
     private final double TPR = 383.6; //ticks per rotation
     //cm per rotation/ticks per rotation
     private final double CM_PER_TICK = (2 * Math.PI * GEAR_RATIO * WHEEL_RADIUS) / TPR;
@@ -75,7 +75,6 @@ public class MecanumDrive extends Mechanism {
         leftRear.setPower(maxSpeed * (leftRearPower/maxPower));
     }
 
-    //TODO: learn the stuff below
     private MatrixF conversion;
     private final GeneralMatrixF encoderMatrix = new GeneralMatrixF(3, 1);
 

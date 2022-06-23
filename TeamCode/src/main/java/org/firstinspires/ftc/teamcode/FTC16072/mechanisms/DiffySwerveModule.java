@@ -44,7 +44,7 @@ public class DiffySwerveModule extends Mechanism {
             rotate(targetAngle);
         }
         //TODO:figure out why this happens
-        else if(this.rotating){
+        else {
             rotate(targetAngle);
             topMotor.setPower(0.5);
             bottomMotor.setPower(0.5);

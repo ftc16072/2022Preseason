@@ -15,10 +15,10 @@ public class DiffySwerveModule extends Mechanism {
     DcMotorEx bottomMotor;
 
     private double currentAngle;
-    private double targetAngle;
     private boolean rotating;
 
     private double encoderConstant;
+
     //TODO: find this out in meeting
 
     @Override
@@ -28,17 +28,20 @@ public class DiffySwerveModule extends Mechanism {
         bottomMotor = hwMap.get(DcMotorEx.class, "bottom_motor");
         bottomMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
+
+    public DiffySwerveModule(HardwareMap hwMap, String topName, String bottomName) {
+        topMotor = hwMap.get(DcMotorEx.class, topName);
+        topMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        bottomMotor = hwMap.get(DcMotorEx.class, bottomName);
+        bottomMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+
     public boolean isRotating(){
-        if(currentAngle!=targetAngle){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return this.rotating;
 
     }
-    public void rotate(double angle){
-        if(!this.rotating){
+    public void rotate(double joystickX){
+        /*if(!this.rotating){
             targetAngle = angle;
             this.rotating=true;
             rotate(targetAngle);
@@ -52,6 +55,42 @@ public class DiffySwerveModule extends Mechanism {
 
         if(this.currentAngle==this.targetAngle){
             rotating = false;
+        }
+        */
+
+        if(joystickX < 0){
+            topMotor.setPower(-0.8);
+            bottomMotor.setPower(0.8);
+            rotating = true;
+        }
+        else if (joystickX > 0){
+            topMotor.setPower(0.8);
+            bottomMotor.setPower(-0.8);
+            rotating = true;
+        }
+        else{
+            topMotor.setPower(0);
+            bottomMotor.setPower(0);
+            rotating = false;
+        }
+    }
+
+    public void move(double joystickY){
+        if (this.rotating == true){
+        }
+        else{
+            if (joystickY > 0){
+                topMotor.setPower(0.8);
+                bottomMotor.setPower(0.8);
+            }
+            else if (joystickY < 0){
+                topMotor.setPower(-0.8);
+                bottomMotor.setPower(-0.8);
+            }
+            else{
+                topMotor.setPower(0);
+                bottomMotor.setPower(0);
+            }
         }
     }
 

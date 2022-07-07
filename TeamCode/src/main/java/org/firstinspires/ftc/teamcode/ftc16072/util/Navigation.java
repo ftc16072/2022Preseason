@@ -1,8 +1,7 @@
-package org.firstinspires.ftc.teamcode.FTC16072.util;
+package org.firstinspires.ftc.teamcode.ftc16072.util;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.FTC16072.Robot;
+import org.firstinspires.ftc.teamcode.ftc16072.Robot;
 
 public class Navigation {
     public Robot robot;

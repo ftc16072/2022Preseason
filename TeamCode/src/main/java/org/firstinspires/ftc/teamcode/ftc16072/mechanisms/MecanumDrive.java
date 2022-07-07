@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.FTC16072.mechanisms;
+package org.firstinspires.ftc.teamcode.ftc16072.mechanisms;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.matrices.GeneralMatrixF;
 import org.firstinspires.ftc.robotcore.external.matrices.MatrixF;
-import org.firstinspires.ftc.teamcode.FTC16072.tests.QQTest;
-import org.firstinspires.ftc.teamcode.FTC16072.tests.TestMotor;
+import org.firstinspires.ftc.teamcode.ftc16072.tests.QQTest;
+import org.firstinspires.ftc.teamcode.ftc16072.tests.TestMotor;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,12 +1,12 @@
-package org.firstinspires.ftc.teamcode.FTC16072.mechanisms;
+package org.firstinspires.ftc.teamcode.ftc16072.mechanisms;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.teamcode.FTC16072.tests.QQTest;
+import org.firstinspires.ftc.robotcore.external.navigation.MotionDetection;
+import org.firstinspires.ftc.teamcode.ftc16072.tests.QQTest;
 
 import java.util.List;
 
@@ -41,6 +41,7 @@ public class DiffySwerveModule extends Mechanism {
 
     }
     public void rotate(double joystickX){
+
         /*if(!this.rotating){
             targetAngle = angle;
             this.rotating=true;

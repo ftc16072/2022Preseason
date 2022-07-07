@@ -1,15 +1,12 @@
-package org.firstinspires.ftc.teamcode.FTC16072.mechanisms;
+package org.firstinspires.ftc.teamcode.ftc16072.mechanisms;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.FTC16072.DiffySwerveBot;
-import org.firstinspires.ftc.teamcode.FTC16072.tests.QQTest;
+import org.firstinspires.ftc.teamcode.ftc16072.tests.QQTest;
 
 import java.util.List;
 
-public class DiffySwerveDrive extends Mechanism{
+public class DiffySwerveDrive extends Mechanism {
 
     DiffySwerveModule LeftModule;
     DiffySwerveModule RightModule;

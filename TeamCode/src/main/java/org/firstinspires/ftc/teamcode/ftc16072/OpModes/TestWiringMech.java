@@ -1,12 +1,11 @@
-package org.firstinspires.ftc.teamcode.FTC16072.OpModes;
+package org.firstinspires.ftc.teamcode.ftc16072.OpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.FTC16072.MechanumRobot;
-import org.firstinspires.ftc.teamcode.FTC16072.Robot;
-import org.firstinspires.ftc.teamcode.FTC16072.mechanisms.Mechanism;
-import org.firstinspires.ftc.teamcode.FTC16072.tests.QQTest;
+import org.firstinspires.ftc.teamcode.ftc16072.MechanumRobot;
+import org.firstinspires.ftc.teamcode.ftc16072.mechanisms.Mechanism;
+import org.firstinspires.ftc.teamcode.ftc16072.tests.QQTest;
 
 import java.util.List;
 

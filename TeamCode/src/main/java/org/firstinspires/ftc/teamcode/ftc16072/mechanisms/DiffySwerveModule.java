@@ -5,108 +5,76 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.MotionDetection;
 import org.firstinspires.ftc.teamcode.ftc16072.tests.QQTest;
+import org.firstinspires.ftc.teamcode.ftc16072.tests.TestMotor;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class DiffySwerveModule extends Mechanism {
+
+    static final double TICKS_PER_ROTATION = 560;
+    boolean reversed;
+
     DcMotorEx topMotor;
     DcMotorEx bottomMotor;
 
-    private double currentAngle;
-    private boolean rotating;
+    private String suffix;
 
-    private double encoderConstant;
-
-    //TODO: find this out in meeting
+    public DiffySwerveModule(String suffix) {
+        this.suffix = suffix;
+    }
 
     @Override
     public void init(HardwareMap hwMap) {
-        topMotor = hwMap.get(DcMotorEx.class, "top_motor");
+        topMotor = hwMap.get(DcMotorEx.class, "top_" + suffix);
+        topMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         topMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        bottomMotor = hwMap.get(DcMotorEx.class, "bottom_motor");
+
+        bottomMotor = hwMap.get(DcMotorEx.class, "bottom_" + suffix);
+        bottomMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         bottomMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
-    public DiffySwerveModule(HardwareMap hwMap, String topName, String bottomName) {
-        topMotor = hwMap.get(DcMotorEx.class, topName);
-        topMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        bottomMotor = hwMap.get(DcMotorEx.class, bottomName);
-        bottomMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    public double modifySpeed(double speed){
+        if(reversed){
+            speed = speed * -1;
+        }
+        return speed;
     }
 
-    public boolean isRotating(){
-        return this.rotating;
-
-    }
-    public void rotate(double joystickX){
-
-        /*if(!this.rotating){
-            targetAngle = angle;
-            this.rotating=true;
-            rotate(targetAngle);
+    public double getAngle(AngleUnit au){
+        double currentAngle = 180 * (topMotor.getCurrentPosition() + bottomMotor.getCurrentPosition())
+                / (4.0 * TICKS_PER_ROTATION);
+        if(reversed){
+            currentAngle += 180;
         }
-        //TODO:figure out why this happens
-        else {
-            rotate(targetAngle);
-            topMotor.setPower(0.5);
-            bottomMotor.setPower(0.5);
-        }
-
-        if(this.currentAngle==this.targetAngle){
-            rotating = false;
-        }
-        */
-
-        if(joystickX < 0){
-            topMotor.setPower(-0.8);
-            bottomMotor.setPower(0.8);
-            rotating = true;
-        }
-        else if (joystickX > 0){
-            topMotor.setPower(0.8);
-            bottomMotor.setPower(-0.8);
-            rotating = true;
-        }
-        else{
-            topMotor.setPower(0);
-            bottomMotor.setPower(0);
-            rotating = false;
-        }
+        return au.fromDegrees(currentAngle);
     }
 
-    public void move(double joystickY){
-        if (this.rotating == true){
+    public double getOffset(double newAngle,AngleUnit au){
+        double currentAngle = getAngle(AngleUnit.DEGREES);
+        double offsetDegrees = AngleUnit.normalizeDegrees(au.toDegrees(newAngle) - currentAngle);
+
+        if(Math.abs(offsetDegrees) > 90){
+            reversed = !reversed;
+            offsetDegrees = AngleUnit.normalizeDegrees(offsetDegrees + 180);
         }
-        else{
-            if (joystickY > 0){
-                topMotor.setPower(0.8);
-                bottomMotor.setPower(0.8);
-            }
-            else if (joystickY < 0){
-                topMotor.setPower(-0.8);
-                bottomMotor.setPower(-0.8);
-            }
-            else{
-                topMotor.setPower(0);
-                bottomMotor.setPower(0);
-            }
-        }
+        return au.fromDegrees(offsetDegrees);
     }
 
-    private double getAngle(AngleUnit au) {
-        return au.toRadians(this.currentAngle);
+    public void setPowers(double topPower, double bottomPower){
+        topMotor.setPower(topPower);
+        bottomMotor.setPower(bottomPower);
     }
 
-    private double ticksToAngle(double ticks) {
-        double au = ticks * encoderConstant;
-        return au;
-//TODO: Meeting task
-    }
 
     @Override
     public List<QQTest> getTests() {
-        return null;
+        return Arrays.asList(
+                new TestMotor(topMotor, "Top_" + suffix, 0.2),
+                new TestMotor(bottomMotor, "Bottom_" + suffix, 0.2)
+        );
+
     }
 }

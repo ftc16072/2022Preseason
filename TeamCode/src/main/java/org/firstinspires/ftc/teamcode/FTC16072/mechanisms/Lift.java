@@ -14,7 +14,7 @@ public class Lift extends Mechanism{
     @Override
     public void init(HardwareMap hwMap) {
         liftMotor = hwMap.get(DcMotorEx.class, "Lift");
-        //liftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
         v4b = hwMap.get(Servo.class, "v4b");
     }
 

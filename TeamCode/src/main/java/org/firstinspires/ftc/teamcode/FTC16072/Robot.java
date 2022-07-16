@@ -6,6 +6,7 @@ import org.firstinspires.ftc.teamcode.FTC16072.mechanisms.Box;
 import org.firstinspires.ftc.teamcode.FTC16072.mechanisms.DuckSpinner;
 import org.firstinspires.ftc.teamcode.FTC16072.mechanisms.Gyro;
 import org.firstinspires.ftc.teamcode.FTC16072.mechanisms.Intake;
+import org.firstinspires.ftc.teamcode.FTC16072.mechanisms.Lift;
 import org.firstinspires.ftc.teamcode.FTC16072.mechanisms.MecanumDrive;
 import org.firstinspires.ftc.teamcode.FTC16072.mechanisms.Mechanism;
 import org.firstinspires.ftc.teamcode.FTC16072.mechanisms.Virtual4Bar;
@@ -22,6 +23,7 @@ public class Robot {
     public Virtual4Bar virtual4Bar = new Virtual4Bar();
     public MecanumDrive mecanumDrive=new MecanumDrive();
     public Gyro gyro = new Gyro();
+    public Lift lift = new Lift();
     List<Mechanism> mechanismList = Arrays.asList(
             frontIntake,
             backIntake,
@@ -30,7 +32,8 @@ public class Robot {
             box,
             virtual4Bar,
             mecanumDrive,
-            gyro
+            gyro,
+            lift
     );
     public void init (HardwareMap hwMap){
         for(Mechanism mechanism : mechanismList){

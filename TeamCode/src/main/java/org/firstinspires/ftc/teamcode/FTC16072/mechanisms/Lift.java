@@ -30,4 +30,11 @@ public class Lift extends Mechanism{
                 //TODO:review the above
         );
     }
+    public void stopMotor() {
+        liftMotor.setPower(0);
+    }
+
+    public double getLiftPosition() {
+        return liftMotor.getCurrentPosition();
+    }
 }

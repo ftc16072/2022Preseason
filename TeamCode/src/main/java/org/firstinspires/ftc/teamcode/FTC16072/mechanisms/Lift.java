@@ -14,6 +14,15 @@ import java.util.List;
 public class Lift extends Mechanism{
     public DcMotorEx liftMotor;
     public Servo v4b;
+    public double retractPosition;
+    public double extendPosition;
+    public double servoTopPosition;
+    public double servoMiddlePosition;
+    public double servoBottomPosition;
+    public static int max;
+    public static int min;
+    //TODO: what is max and min values for extending and retracting
+
     @Override
     public void init(HardwareMap hwMap) {
         liftMotor = hwMap.get(DcMotorEx.class, "Lift");
@@ -36,5 +45,37 @@ public class Lift extends Mechanism{
 
     public double getLiftPosition() {
         return liftMotor.getCurrentPosition();
+    }
+
+    public void retract(double power){
+        liftMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        if(canRetract()==true){
+            liftMotor.setPower(power);
+        }
+    }
+    public void extend(double power){
+        liftMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        if(canExtend()==true){
+            liftMotor.setPower(power);
+        }
+    }
+    public void extendVirtual4Bar(){
+        v4b.setPosition(servoBottomPosition);
+    }
+    public boolean canRetract(){
+        if(liftMotor.getCurrentPosition() > min){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public boolean canExtend(){
+        if(liftMotor.getCurrentPosition() < max){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

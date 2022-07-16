@@ -16,13 +16,19 @@ public class Lift extends Mechanism{
     public Servo v4b;
     public double retractPosition;
     public double extendPosition;
-    public double servoTopPosition;
-    public double servoMiddlePosition;
-    public double servoBottomPosition;
+    public double servoTopPosition = 0.0;
+    public double servoMiddlePosition = 0.0;
+    public double servoBottomPosition = 0.0;
     public static int max;
     public static int min;
-    //TODO: what is max and min values for extending and retracting
+    //TODO: what are max and min values for extending and retracting
 
+    public enum State{
+        INTAKE,
+        LEVEL1,
+        LEVEL2,
+        LEVEL3
+    }
     @Override
     public void init(HardwareMap hwMap) {
         liftMotor = hwMap.get(DcMotorEx.class, "Lift");
@@ -78,4 +84,6 @@ public class Lift extends Mechanism{
             return false;
         }
     }
+
+
 }

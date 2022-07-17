@@ -14,14 +14,21 @@ import java.util.List;
 public class Lift extends Mechanism{
     public DcMotorEx liftMotor;
     public Servo v4b;
-    public double retractPosition;
-    public double extendPosition;
-    public double servoTopPosition = 0.0;
-    public double servoMiddlePosition = 0.0;
-    public double servoBottomPosition = 0.0;
+    //these are for slides
+    public double intakePosition = 0.0;
+    public double retractPosition = 0.2;
+    public double middlePosition = 0.7;
+    public double extendPosition = 1.0;
+    //servo positions are v4b levels for shipping hub
+    public double servoIntakePosition = 0.0;
+    public double servoTopPosition = 0.3;
+    public double servoMiddlePosition = 0.7;
+    public double servoBottomPosition = 1.0;
+    //TODO: find the real values for the position
     public static int max;
     public static int min;
     //TODO: what are max and min values for extending and retracting
+    public State state = State.INTAKE;
 
     public enum State{
         INTAKE,
@@ -29,6 +36,7 @@ public class Lift extends Mechanism{
         LEVEL2,
         LEVEL3
     }
+
     @Override
     public void init(HardwareMap hwMap) {
         liftMotor = hwMap.get(DcMotorEx.class, "Lift");
@@ -82,6 +90,33 @@ public class Lift extends Mechanism{
         }
         else{
             return false;
+        }
+    }
+
+    public double slidePosition(){
+        switch(state){
+            case INTAKE:
+                return intakePosition;
+            case LEVEL1:
+                return retractPosition;
+            case LEVEL2:
+                return middlePosition;
+            case LEVEL3:
+            default:
+                return extendPosition;
+        }
+    }
+    public double v4bPosition(){
+        switch (state){
+            case INTAKE:
+                return servoIntakePosition;
+            case LEVEL1:
+                return servoBottomPosition;
+            case LEVEL2:
+                return servoMiddlePosition;
+            case LEVEL3:
+            default:
+                return servoTopPosition;
         }
     }
 

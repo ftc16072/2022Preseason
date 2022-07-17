@@ -14,18 +14,32 @@ import java.util.List;
 public class Lift extends Mechanism{
     public DcMotorEx liftMotor;
     public Servo v4b;
-    public double retractPosition;
-    public double extendPosition;
-    public double servoTopPosition;
-    public double servoMiddlePosition;
-    public double servoBottomPosition;
-    public static int max;
-    public static int min;
-    //TODO: what is max and min values for extending and retracting
+    //these are for slides
+    public double intakePosition = 0.0;
+    public double retractPosition = 0.2;
+    public double middlePosition = 0.7;
+    public double extendPosition = 1.0;
+    //servo positions are v4b levels for shipping hub
+    public double servoIntakePosition = 0.0;
+    public double servoTopPosition = 0.3;
+    public double servoMiddlePosition = 0.7;
+    public double servoBottomPosition = 1.0;
+    //TODO: find the real values for the position
+    public static int slidesMax;
+    public static int slidesMin;
+    //TODO: what are max and min values for extending and retracting
+    public State state = State.INTAKE;
+
+    public enum State{
+        INTAKE,
+        LEVEL1,
+        LEVEL2,
+        LEVEL3
+    }
 
     @Override
     public void init(HardwareMap hwMap) {
-        liftMotor = hwMap.get(DcMotorEx.class, "Lift");
+        liftMotor = hwMap.get(DcMotorEx.class, "lift");
 
         v4b = hwMap.get(Servo.class, "v4b");
     }
@@ -39,10 +53,11 @@ public class Lift extends Mechanism{
                 //TODO:review the above
         );
     }
+    //stops motor
     public void stopMotor() {
         liftMotor.setPower(0);
     }
-
+    //accesor method
     public double getLiftPosition() {
         return liftMotor.getCurrentPosition();
     }
@@ -59,11 +74,20 @@ public class Lift extends Mechanism{
             liftMotor.setPower(power);
         }
     }
-    public void extendVirtual4Bar(){
+    public void extendVirtual4BarBottom(){
         v4b.setPosition(servoBottomPosition);
     }
+    public void extentVirtual4BarMiddle(){
+        v4b.setPosition(servoMiddlePosition);
+    }
+    public void extendVirtual4BarTop(){
+        v4b.setPosition(servoTopPosition);
+    }
+    public void intakeVirtual4Bar(){
+        v4b.setPosition(servoIntakePosition);
+    }
     public boolean canRetract(){
-        if(liftMotor.getCurrentPosition() > min){
+        if(liftMotor.getCurrentPosition() > slidesMin){
             return true;
         }
         else{
@@ -71,11 +95,41 @@ public class Lift extends Mechanism{
         }
     }
     public boolean canExtend(){
-        if(liftMotor.getCurrentPosition() < max){
+        if(liftMotor.getCurrentPosition() < slidesMax){
             return true;
         }
         else{
             return false;
         }
     }
+
+    public double getSlidePosition(){
+        switch(state){
+            case INTAKE:
+                return intakePosition;
+            case LEVEL1:
+                return retractPosition;
+            case LEVEL2:
+                return middlePosition;
+            case LEVEL3:
+            default:
+                return extendPosition;
+        }
+    }
+
+    public double getV4bPosition(){
+        switch (state){
+            case INTAKE:
+                return servoIntakePosition;
+            case LEVEL1:
+                return servoBottomPosition;
+            case LEVEL2:
+                return servoMiddlePosition;
+            case LEVEL3:
+            default:
+                return servoTopPosition;
+        }
+    }
+
+
 }

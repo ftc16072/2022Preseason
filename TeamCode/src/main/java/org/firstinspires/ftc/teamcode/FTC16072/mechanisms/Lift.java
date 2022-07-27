@@ -44,6 +44,7 @@ public class Lift extends Mechanism {
 //liftMotor.resetDeviceConfigurationForOpMode();
         liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         v4b = hwMap.get(Servo.class, "v4b");
+        liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
     @Override

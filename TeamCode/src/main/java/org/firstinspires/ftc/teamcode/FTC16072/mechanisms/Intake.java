@@ -43,9 +43,13 @@ public class Intake extends Mechanism{
             motor.setPower(speed);
         }
     }
+    public void start(double speed){
+        setSpeed(speed);
+    }
     public void start(){
         setSpeed(0.7);
     }
+
     public void stop(){
         setSpeed(0.0);
     }

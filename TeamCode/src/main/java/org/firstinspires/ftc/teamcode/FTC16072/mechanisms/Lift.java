@@ -17,18 +17,18 @@ public class Lift extends Mechanism {
     public Servo v4b;
     //these are for slides
     //TODO: find the real values for these lift slide positions
-    public double intakePosition = 0.0;
-    public double retractPosition = 0.2;
-    public double middlePosition = 0.7;
-    public double extendPosition = 1.0;
+    public double intakePosition = -150;
+    public double retractPosition = -150;
+    public double middlePosition = 2150;
+    public double extendPosition = 2400;
     //servo positions are v4b levels for shipping hub
     public double servoIntakePosition = 0.9;
     public double servoTopPosition = 0.3;
     public double servoMiddlePosition = 0.45;
     public double servoBottomPosition = 0.6;
     //TODO: find the real value for the slidesMax position
-    public static int slidesMax = -3000;
-    public static int slidesMin = 0;
+    public static int slidesMax = -5000;
+    public static int slidesMin = 500;
     public State state = State.INTAKE;
 
     public enum State {
@@ -52,7 +52,7 @@ public class Lift extends Mechanism {
                 new TestMotor(liftMotor, "Lift_Up", 0.2),
                 new TestMotor(liftMotor, "Lift_Down", -0.2),
                 new TestServo(v4b, "v4b", 0.2, 0)
-                //TODO:review the above
+                //TODO: review the above
         );
     }
 
@@ -109,7 +109,7 @@ public class Lift extends Mechanism {
     }
 
     public boolean canExtend() {
-        if (liftMotor.getCurrentPosition() < slidesMin) {
+        if (liftMotor.getCurrentPosition() <= slidesMin) {
             return true;
         } else {
             return false;

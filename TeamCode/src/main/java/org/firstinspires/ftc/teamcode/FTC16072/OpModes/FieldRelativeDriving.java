@@ -19,12 +19,12 @@ public class FieldRelativeDriving extends OpMode {
     @Override
     public void loop() {
         if(gamepad1.right_bumper){
-            robot.frontIntake.start();
+            robot.frontIntake.start(0.7);
         }else{
             robot.frontIntake.stop();
         }
         if(gamepad1.left_bumper){
-            robot.backIntake.start();
+            robot.backIntake.start(0.7);
         }else{
             robot.backIntake.stop();
         }

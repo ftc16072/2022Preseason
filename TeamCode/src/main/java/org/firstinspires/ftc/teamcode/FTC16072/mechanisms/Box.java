@@ -13,8 +13,8 @@ import java.util.List;
 //@Config
 public class Box extends Mechanism{
     Servo door;
-    final static double OPEN = 0.1;
-    final static double CLOSED = 0.6;
+    final static double OPEN = 0.5;
+    final static double CLOSED = 0.8;
 
     @Override
     public void init(HardwareMap hwMap) {

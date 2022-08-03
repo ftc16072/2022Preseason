@@ -18,10 +18,10 @@ public class LiftTesting extends OpMode {
     @Override
     public void loop() {
         telemetry.addLine(String.valueOf(robot.lift.getLiftPosition()));
-        telemetry.addLine(String.valueOf(robot.lift.currentV4bPosition()));
+        //telemetry.addLine(String.valueOf(robot.lift.currentV4bPosition()));
         if (gamepad1.dpad_left) {// && robot.lift.getLiftPosition() > robot.lift.intakePosition ){
             robot.lift.retract(0.5);
-        } else if (gamepad1.dpad_right) {//&& robot.lift.getLiftPosition() < robot.lift.extendPosition){
+        }else if (gamepad1.dpad_right) {//&& robot.lift.getLiftPosition() < robot.lift.extendPosition){
             robot.lift.extend(-0.5);
         } else {
             robot.lift.stopMotor();

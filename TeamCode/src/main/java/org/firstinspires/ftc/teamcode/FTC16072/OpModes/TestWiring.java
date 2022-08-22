@@ -12,7 +12,7 @@ import java.util.List;
 @TeleOp()
 public class TestWiring extends OpMode {
     Robot robot = new Robot();
-    boolean wasDown, wasRight;
+    boolean wasDown;
     List<Mechanism> mechanismList;
     List<QQTest> testList;
     int currentMechanism;
@@ -26,9 +26,9 @@ public class TestWiring extends OpMode {
 
     @Override
     public void loop() {
-        if(gamepad1.dpad_down && !wasDown){
+        if (gamepad1.dpad_down && !wasDown) {
             currentMechanism += 1;
-            if (currentMechanism >= mechanismList.size()){
+            if (currentMechanism >= mechanismList.size()) {
                 currentMechanism = 0;
             }
             currentTest = 0;
@@ -36,9 +36,9 @@ public class TestWiring extends OpMode {
         wasDown = gamepad1.dpad_down;
         testList = mechanismList.get(currentMechanism).getTests();
 
-        if(gamepad1.dpad_right && !wasRight){
+        if (gamepad1.dpad_right) {
             currentTest += 1;
-            if (currentTest >= testList.size()){
+            if (currentTest >= testList.size()) {
                 currentTest = 0;
             }
         }

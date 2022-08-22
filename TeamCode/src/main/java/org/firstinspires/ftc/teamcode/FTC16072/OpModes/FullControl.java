@@ -9,11 +9,10 @@ import org.firstinspires.ftc.teamcode.FTC16072.util.Navigation;
 
 @TeleOp()
 public class FullControl extends OpMode {
-    Robot robot = new Robot();
-    Navigation nav = new Navigation(robot);
-
     final double LIFT_EXTEND_POWER = 0.5;
     final double LIFT_RETRACT_POWER = 0.5;
+    Robot robot = new Robot();
+    Navigation nav = new Navigation(robot);
 
     @Override
     public void init() {
@@ -22,44 +21,40 @@ public class FullControl extends OpMode {
 
     @Override
     public void loop() {
-        if(gamepad1.right_bumper){
+        if (gamepad1.right_bumper) {
             robot.frontIntake.start();
-        }else{
+        } else {
             robot.frontIntake.stop();
         }
-        if(gamepad1.left_bumper){
+        if (gamepad1.left_bumper) {
             robot.backIntake.start();
-        }else{
+        } else {
             robot.backIntake.stop();
         }
-        if(gamepad1.a){
+        if (gamepad1.a) {
             robot.frontDuckSpinner.start();
             robot.backDuckSpinner.start();
-        }else{
+        } else {
             robot.frontDuckSpinner.stop();
             robot.backDuckSpinner.stop();
         }
-        if(gamepad1.b){
+        if (gamepad1.b) {
             robot.box.open();
-        }else {
+        } else {
             robot.box.close();
         }
-        if(gamepad1.dpad_up){
+        if (gamepad1.dpad_up) {
             robot.lift.extend(LIFT_EXTEND_POWER);
-        }
-        else if(gamepad1.dpad_down){
+        } else if (gamepad1.dpad_down) {
             robot.lift.retract(LIFT_RETRACT_POWER);
-        }
-        else{
+        } else {
             robot.lift.stopMotor();
         }
-        if(gamepad1.y){
+        if (gamepad1.y) {
             robot.virtual4Bar.goTo(Virtual4Bar.Position.TOP);
-        }
-        else if(gamepad1.x){
+        } else if (gamepad1.x) {
             robot.virtual4Bar.goTo(Virtual4Bar.Position.BOTTOM);
-        }
-        else if(gamepad1.a) {
+        } else if (gamepad1.a) {
             robot.virtual4Bar.goTo(Virtual4Bar.Position.INTAKE);
         }
 

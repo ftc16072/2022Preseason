@@ -16,26 +16,26 @@ public class Driving extends OpMode {
 
     @Override
     public void loop() {
-        if(gamepad1.right_bumper){
+        if (gamepad1.right_bumper) {
             robot.frontIntake.start();
-        }else{
+        } else {
             robot.frontIntake.stop();
         }
-        if(gamepad1.left_bumper){
+        if (gamepad1.left_bumper) {
             robot.backIntake.start();
-        }else{
+        } else {
             robot.backIntake.stop();
         }
-        if(gamepad1.a){
+        if (gamepad1.a) {
             robot.frontDuckSpinner.start();
             robot.backDuckSpinner.start();
-        }else{
+        } else {
             robot.frontDuckSpinner.stop();
             robot.backDuckSpinner.stop();
         }
-        if(gamepad1.b){
+        if (gamepad1.b) {
             robot.box.open();
-        }else{
+        } else {
             robot.box.close();
         }
 

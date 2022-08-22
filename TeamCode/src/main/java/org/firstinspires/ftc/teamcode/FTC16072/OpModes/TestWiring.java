@@ -36,7 +36,7 @@ public class TestWiring extends OpMode {
         wasDown = gamepad1.dpad_down;
         testList = mechanismList.get(currentMechanism).getTests();
 
-        if(gamepad1.dpad_right && !wasRight){
+        if(gamepad1.dpad_right && !wasWrong){
             currentTest += 1;
             if (currentTest >= testList.size()){
                 currentTest = 0;

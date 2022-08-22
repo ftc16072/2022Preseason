@@ -20,6 +20,7 @@ public class TestWiring extends OpMode {
 
     @Override
     public void init() {
+        // FIXME
         robot.init(hardwareMap);
         mechanismList = robot.getMechanismList();
     }

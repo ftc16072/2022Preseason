@@ -12,7 +12,7 @@ import java.util.List;
 @TeleOp()
 public class TestWiring extends OpMode {
     Robot robot = new Robot();
-    boolean wasDown, wasRight;
+    boolean wasDown, wasWrong;
     List<Mechanism> mechanismList;
     List<QQTest> testList;
     int currentMechanism;

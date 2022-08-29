@@ -6,3 +6,4 @@ Add your name below to show that your git accounts are all working
 * Chirag
 * Izaak
 * Swayam
+* Nikhil
